@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 mongodb.env
-data/
+movie_blog_server/data/
