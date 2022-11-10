@@ -27,14 +27,28 @@ function App() {
 
   const addComment = (event, id) => {
     event.preventDefault();
-    const comment = {
-      id: id,
-      name: event.target.value[0],
-      description: event.target.value[1]
-    }
-    axios.post('/api/movies/1', comment)
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+    // const comment = {
+    //   id: id,
+    //   name: event.target[0].value,
+    //   description: event.target[1].value
+    // }
+    // console.log(comment, 'FUCK');
+
+    axios({
+      method: 'post',
+      url: `/api/movies/${id}`,
+      data: {
+        id: id,
+        name: event.target[0].value,
+        description: event.target[1].value
+      }
+    });
+
+
+
+    // axios.post('/api/movies/1', { body: comment })
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error));
   }
 
   // TODO

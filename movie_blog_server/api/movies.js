@@ -1,5 +1,6 @@
 const axios = require("axios");
 const express = require('express');
+const { saveComments } = require("../database/database");
 const router = express.Router();
 const { moviesAPI } = require('./moviesAPI');
 
@@ -20,6 +21,12 @@ router.get('/', (req, res) => {
     .catch(function (error) {
       console.error(error);
     });
+});
+
+router.post('/:id', (req, res) => {
+  if (req.body.id && req.body.name && req.body.description) {
+    saveComments(req.body);
+  }
 });
 
 module.exports = router;

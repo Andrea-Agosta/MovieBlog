@@ -4,6 +4,9 @@ const { testDb } = require('./database/database');
 const { moviesAPI } = require('./api/moviesAPI');
 const app = express();
 const movies = require('./api/movies');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use(express.static("public"));
 app.use('/api/movies', movies);
