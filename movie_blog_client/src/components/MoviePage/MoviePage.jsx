@@ -33,6 +33,7 @@ const MoviePage = ({ data }) => {
         description: event.target[1].value
       }
     });
+    getComments();
   }
 
   const ratingChanged = (newRating) => {
