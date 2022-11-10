@@ -1,20 +1,28 @@
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from "react";
+import Navbar from './components/Navbar/Navbar';
+import List from './components/List/List';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import MoviePage from './components/MoviePage/MoviePage';
 
 function App() {
   const [data, setData] = useState([]);
+  const [movie, setMovie] = useState({});
 
   const fetchData = () => {
-    axios.get('/api')
+    axios.get('/api/movies', { params: { page: 1 } })
       .then(function (response) {
-        console.log(response);
+        setData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       })
   }
+
+  const handleClick = (data) => {
+    setMovie(data);
+  };
 
   // TODO
   // LOGO
@@ -27,19 +35,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Navbar />
       </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<List data={data} handleClick={handleClick} />}></Route>
+          <Route path="/movie/*" element={<MoviePage data={movie} />}></Route>
+        </Routes>
+      </main>
     </div>
   );
 }
