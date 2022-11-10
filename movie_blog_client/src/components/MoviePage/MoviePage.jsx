@@ -33,6 +33,8 @@ const MoviePage = ({ data }) => {
         description: event.target[1].value
       }
     });
+    event.target[0].value = "";
+    event.target[1].value = "";
     getComments();
   }
 
