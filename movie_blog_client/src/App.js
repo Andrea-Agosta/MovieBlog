@@ -9,13 +9,12 @@ import MoviePage from './components/MoviePage/MoviePage';
 function App() {
   const [data, setData] = useState([]);
   const [movie, setMovie] = useState({});
-  const [comments, setComments] = useState([]);
 
   const fetchData = () => {
     axios.get('/api/movies', { params: { page: 1 } })
       .then(function (response) {
-        setData(response.data.data[1]);
-        setComments(response.data.data[0])
+        console.log(response, 'from DB');
+        setData(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -25,19 +24,6 @@ function App() {
   const handleClick = (data) => {
     setMovie(data);
   };
-
-  const addComment = (event, id) => {
-    event.preventDefault();
-    axios({
-      method: 'post',
-      url: `/api/movies/${id}`,
-      data: {
-        id: id,
-        name: event.target[0].value,
-        description: event.target[1].value
-      }
-    });
-  }
 
   // TODO
   // LOGO
@@ -55,7 +41,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<List data={data} handleClick={handleClick} />}></Route>
-          <Route path="/movie/*" element={<MoviePage data={movie} addComment={addComment} listOfComments={comments} />}></Route>
+          <Route path="/movie/*" element={<MoviePage data={movie} />}></Route>
         </Routes>
       </main>
     </div>

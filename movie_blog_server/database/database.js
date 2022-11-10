@@ -25,9 +25,9 @@ const saveComments = async (newComment) => {
   setTimeout(() => client.close(), 1000);
 }
 
-const getComments = async () => {
+const getComments = async (id) => {
   const { collection, client } = await connect();
-  const result = await collection.find({}).toArray();
+  const result = await collection.findOne({}, { id: id });
   setTimeout(() => client.close(), 1000);
   return result;
 }

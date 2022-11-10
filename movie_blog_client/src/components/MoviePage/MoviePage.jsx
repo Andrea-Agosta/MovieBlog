@@ -2,13 +2,37 @@ import './MoviePage.css';
 import StarsRating from 'stars-rating'
 import { useState } from 'react';
 import UserForm from './UserForm';
+import axios from 'axios';
+import CommentsList from './CommentsList';
 
-const MoviePage = ({ data, addComment, listOfComments }) => {
+
+const MoviePage = ({ data }) => {
   const loremIpsum = `is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`;
   const [rate, setRate] = useState(data.rating);
+  const [comments, setComments] = useState([]);
 
-  console.log(listOfComments, 'HHHHHHHHHHHHHHHHHHHH');
+  const getComments = () => {
+    axios.get(`/api/movies/${data.id}`)
+      .then(response => {
+        setComments([response.data]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
 
+  const addComment = (event) => {
+    event.preventDefault();
+    axios({
+      method: 'post',
+      url: `/api/movies/${data.id}`,
+      data: {
+        id: data.id,
+        name: event.target[0].value,
+        description: event.target[1].value
+      }
+    });
+  }
 
   const ratingChanged = (newRating) => {
     data.rating === 0 && setRate(newRating);
@@ -16,7 +40,7 @@ const MoviePage = ({ data, addComment, listOfComments }) => {
 
   return (
     <>
-      <div className="m-5 p-3">
+      <div className="m-5 p-3" onLoad={getComments}>
         <div className="container border rounded pb-3 shadow p-3 mb-5 bg-body">
           <div className="row">
             <div className="col-4">
@@ -45,8 +69,8 @@ const MoviePage = ({ data, addComment, listOfComments }) => {
             </div>
           </div>
         </div>
-
-        <UserForm addComment={addComment} movieId={data.id} />
+        <CommentsList comments={comments} />
+        <UserForm addComment={addComment} />
       </div>
     </>
   )

@@ -11,11 +11,9 @@ const moviesAPI = (url) => {
 		}
 	};
 
-	axios.request(options).then(function (response) {
-		return response;
-	}).catch(function (error) {
-		console.error(error);
-	});
+	axios.request(options)
+		.then(response => response)
+		.catch(error => console.error(error));
 }
 
 module.exports = { moviesAPI };
