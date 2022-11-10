@@ -1,12 +1,12 @@
 import Card from "../Card/Card";
 
-const List = ({ data }) => {
+const List = ({ data, handleClick }) => {
   console.log(data);
   return (
-    <div className="d-flex justify-content-center flex-wrap">
+    <div className="d-flex justify-content-center flex-wrap my-4">
       {
         data.map((item, index) => (
-          <Card key={index} data={item} />
+          <Card key={index} data={item} handleClick={handleClick} />
         ))
       }
     </div>
