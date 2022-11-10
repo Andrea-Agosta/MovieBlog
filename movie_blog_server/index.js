@@ -3,9 +3,10 @@ const express = require('express');
 const { testDb } = require('./database/database');
 const { moviesAPI } = require('./api/moviesAPI');
 const app = express();
+const movies = require('./api/movies');
 
 app.use(express.static("public"));
-app.use('/api/movie', movie);
+app.use('/api/movies', movies);
 
 
 // testDb(); CONNECTION MONGO

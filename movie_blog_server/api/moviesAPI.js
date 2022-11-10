@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const moviesAPI = (url) => {	
+const moviesAPI = (url) => {
 	const options = {
 		method: 'GET',
 		// url: 'https://movies-and-serials-torrent.p.rapidapi.com/movies/latest',
@@ -12,7 +12,7 @@ const moviesAPI = (url) => {
 	};
 
 	axios.request(options).then(function (response) {
-		console.log(response.data);
+		return response;
 	}).catch(function (error) {
 		console.error(error);
 	});
