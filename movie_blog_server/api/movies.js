@@ -1,6 +1,6 @@
 const axios = require("axios");
 const express = require('express');
-const { saveComments } = require("../database/database");
+const { saveComments, getComments } = require("../database/database");
 const router = express.Router();
 const { moviesAPI } = require('./moviesAPI');
 
@@ -15,9 +15,14 @@ router.get('/', (req, res) => {
     }
   };
 
-  const dataFromApi = axios.request(options)
-    .then(resp => resp.data.data.movies)
-    .then(data => res.status(200).json(data))
+  getComments()
+    .then(comment => {
+      axios.request(options)
+        .then(async resp => {
+          return await [[...comment], resp.data.data.movies]
+        })
+        .then(data => res.status(200).json({ data }))
+    })
     .catch(function (error) {
       console.error(error);
     });

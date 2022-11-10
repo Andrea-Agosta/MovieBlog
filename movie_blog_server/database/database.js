@@ -25,4 +25,11 @@ const saveComments = async (newComment) => {
   setTimeout(() => client.close(), 1000);
 }
 
-module.exports = { saveComments };
+const getComments = async () => {
+  const { collection, client } = await connect();
+  const result = await collection.find({}).toArray();
+  setTimeout(() => client.close(), 1000);
+  return result;
+}
+
+module.exports = { saveComments, getComments };

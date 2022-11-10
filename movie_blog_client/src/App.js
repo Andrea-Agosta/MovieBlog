@@ -14,7 +14,8 @@ function App() {
   const fetchData = () => {
     axios.get('/api/movies', { params: { page: 1 } })
       .then(function (response) {
-        setData(response.data);
+        setData(response.data.data[1]);
+        setComments(response.data.data[0])
       })
       .catch(function (error) {
         console.log(error);
@@ -27,13 +28,6 @@ function App() {
 
   const addComment = (event, id) => {
     event.preventDefault();
-    // const comment = {
-    //   id: id,
-    //   name: event.target[0].value,
-    //   description: event.target[1].value
-    // }
-    // console.log(comment, 'FUCK');
-
     axios({
       method: 'post',
       url: `/api/movies/${id}`,
@@ -43,12 +37,6 @@ function App() {
         description: event.target[1].value
       }
     });
-
-
-
-    // axios.post('/api/movies/1', { body: comment })
-    //   .then(response => console.log(response))
-    //   .catch(error => console.log(error));
   }
 
   // TODO
@@ -57,7 +45,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, [comments])
+  }, [])
 
   return (
     <div className="App">
@@ -67,7 +55,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<List data={data} handleClick={handleClick} />}></Route>
-          <Route path="/movie/*" element={<MoviePage data={movie} addComment={addComment} />}></Route>
+          <Route path="/movie/*" element={<MoviePage data={movie} addComment={addComment} listOfComments={comments} />}></Route>
         </Routes>
       </main>
     </div>
