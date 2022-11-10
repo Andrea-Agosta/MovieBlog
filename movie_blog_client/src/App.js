@@ -20,6 +20,11 @@ function App() {
       })
   }
 
+  const search = (event) => {
+    event.preventDefault();
+    console.log(event.target[0].value);
+  };
+
   const handleClick = (data) => {
     setMovie(data);
   };
@@ -31,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
+        <Navbar search={search} />
       </header>
       <main>
         <Routes>
