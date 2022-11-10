@@ -5,7 +5,7 @@ const List = ({ data, handleClick }) => {
     <div className="d-flex justify-content-center flex-wrap my-4">
       {
         data.map((item, index) => (
-          <Card key={index} data={item} index={index} handleClick={handleClick} />
+          <Card key={index} data={item} handleClick={handleClick} />
         ))
       }
     </div>

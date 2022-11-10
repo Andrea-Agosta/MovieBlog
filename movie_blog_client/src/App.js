@@ -20,9 +20,18 @@ function App() {
       })
   }
 
+  const resetPage = () => { fetchData() };
+
   const search = (event) => {
     event.preventDefault();
-    console.log(event.target[0].value);
+    axios.get('/api/search', { params: { search: event.target[0].value } })
+      .then(function (response) {
+        setData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    event.target[0].value = '';
   };
 
   const handleClick = (data) => {
@@ -36,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar search={search} />
+        <Navbar search={search} resetPage={resetPage} />
       </header>
       <main>
         <Routes>
