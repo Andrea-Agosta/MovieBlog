@@ -13,7 +13,6 @@ function App() {
   const fetchData = () => {
     axios.get('/api/movies', { params: { page: 1 } })
       .then(function (response) {
-        console.log(response, 'from DB');
         setData(response.data.data);
       })
       .catch(function (error) {
@@ -24,10 +23,6 @@ function App() {
   const handleClick = (data) => {
     setMovie(data);
   };
-
-  // TODO
-  // LOGO
-  // LOOKING FOR NPM PACKAGE AUTH
 
   useEffect(() => {
     fetchData();

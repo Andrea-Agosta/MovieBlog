@@ -14,7 +14,6 @@ const MoviePage = ({ data }) => {
   const getComments = () => {
     axios.get(`/api/movies/${data.id}`)
       .then(response => {
-        console.log(response, 'ksjakjsahdjk');
         setComments([response.data]);
       })
       .catch(function (error) {

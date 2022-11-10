@@ -1,6 +1,5 @@
 const CommentsList = ({ comments }) => {
   return comments.length > 0 && comments[0].map((comment, index) => {
-    console.log(comment, 'insdeMp');
     return (
       <div className="row shadow p-3 mx-1 mb-5 bg-body rounded" key={index}>
         <div className="col-sm-4 col-md-2 col-lg-1 me-4">
