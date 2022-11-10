@@ -1,5 +1,6 @@
 const axios = require("axios");
 const express = require('express');
+const { saveComments, getComments } = require("../database/database");
 const router = express.Router();
 const { moviesAPI } = require('./moviesAPI');
 
@@ -14,12 +15,26 @@ router.get('/', (req, res) => {
     }
   };
 
-  const dataFromApi = axios.request(options)
+  axios.request(options)
     .then(resp => resp.data.data.movies)
-    .then(data => res.status(200).json(data))
-    .catch(function (error) {
-      console.error(error);
-    });
+    .then(data => res.status(200).json({ data }))
+    .catch(error => console.error(error));
+})
+
+router.post('/:id', (req, res) => {
+  if (req.body.id && req.body.name && req.body.description) {
+    saveComments(req.body);
+  }
+});
+
+router.get('/:id', (req, res) => {
+  if (req.params.id) {
+    getComments(req.params.id)
+      .then(data => {
+        res.status(200).json(data)
+      })
+      .catch(error => console.error(error));
+  }
 });
 
 module.exports = router;

@@ -1,26 +1,16 @@
 require('dotenv').config();
 const express = require('express');
-const { testDb } = require('./database/database');
-const { moviesAPI } = require('./api/moviesAPI');
 const app = express();
 const movies = require('./api/movies');
+const search = require('./api/search');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use(express.static("public"));
+
 app.use('/api/movies', movies);
+app.use('/api/search', search);
 
-
-// testDb(); CONNECTION MONGO
-
-
-
-app.get('/api', (req, res) => {
-  // moviesAPI(); //CONNECTION API
-  res.json({ name: 'Hello World!' })
-});
-
-// CREATE ENDPOINT
-// TAKE CARE ABOUT VALIDATION!!!!!
-
-// IF YOU HAVE TIME LOOK FOR MONGOOSE
 
 module.exports = app;

@@ -19,14 +19,17 @@ const connect = async () => {
   return { collection, client };
 };
 
-const testDb = async () => {
+const saveComments = async (newComment) => {
   const { collection, client } = await connect();
-  const newComment = {
-    name: 'test',
-    Comment: 'test'
-  };
   collection.insertOne(newComment);
   setTimeout(() => client.close(), 1000);
 }
 
-module.exports = { testDb };
+const getComments = async (id) => {
+  const { collection, client } = await connect();
+  const result = await collection.find({ "id": +id }).toArray();
+  setTimeout(() => client.close(), 1000);
+  return result;
+}
+
+module.exports = { saveComments, getComments };

@@ -13,20 +13,30 @@ function App() {
   const fetchData = () => {
     axios.get('/api/movies', { params: { page: 1 } })
       .then(function (response) {
-        setData(response.data);
+        setData(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       })
   }
 
+  const resetPage = () => { fetchData() };
+
+  const search = (event) => {
+    event.preventDefault();
+    axios.get('/api/search', { params: { search: event.target[0].value } })
+      .then(function (response) {
+        setData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    event.target[0].value = '';
+  };
+
   const handleClick = (data) => {
     setMovie(data);
   };
-
-  // TODO
-  // LOGO
-  // LOOKING FOR NPM PACKAGE AUTH
 
   useEffect(() => {
     fetchData();
@@ -35,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar />
+        <Navbar search={search} resetPage={resetPage} />
       </header>
       <main>
         <Routes>

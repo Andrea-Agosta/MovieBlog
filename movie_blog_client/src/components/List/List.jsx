@@ -1,7 +1,6 @@
 import Card from "../Card/Card";
 
 const List = ({ data, handleClick }) => {
-  console.log(data);
   return (
     <div className="d-flex justify-content-center flex-wrap my-4">
       {
