@@ -1,6 +1,7 @@
 import './MoviePage.css';
 
 const UserForm = ({ addComment, error }) => {
+  console.log(error, 'ERROR');
   return (
     <>
       <form className="container border rounded mt-5 pb-5 shadow p-3 mb-5 bg-body" onSubmit={event => addComment(event)} >

@@ -11,7 +11,6 @@ const MoviePage = ({ data }) => {
   const [rate, setRate] = useState(data.rating);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState({ errorName: "", errorDescription: "" });
-
   const getComments = () => {
     axios.get(`/api/movies/${data.id}`)
       .then(response => {
@@ -39,10 +38,10 @@ const MoviePage = ({ data }) => {
       event.target[1].value = "";
       getComments();
     } else {
-      !event.target[1].value && setError({ ...error.errorName, errorDescription: 'Please write something' });
-      !event.target[0].value && setError({ ...error.errorDescription, errorName: 'Please insert your name' });
+      !event.target[1].value && setError({ ...error, errorDescription: 'Please write something' });
+      !event.target[0].value && setError({ ...error, errorName: 'Please insert your name' });
     }
-    console.log(error, 'errorHome');
+    // console.log(error, 'errorHome');
   }
 
   const ratingChanged = (newRating) => {
@@ -54,7 +53,7 @@ const MoviePage = ({ data }) => {
       <div className="m-5 p-3" onLoad={getComments}>
         <div className="container border rounded pb-3 shadow p-3 mb-5 bg-body">
           <div className="row">
-            <div className="col-4">
+            <div className="col-12 col-md-4">
               <img src={data.large_cover_image} alt="cover_image" className="container__image" />
             </div>
             <div className="col-8">
