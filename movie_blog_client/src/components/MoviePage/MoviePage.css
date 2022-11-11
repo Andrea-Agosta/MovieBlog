@@ -9,3 +9,12 @@
 .error {
   color: red;
 }
+
+.fa-trash {
+  position: relative;
+  top: -15px;
+}
+
+.fa-trash:hover {
+  color: red;
+}

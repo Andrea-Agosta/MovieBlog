@@ -36,9 +36,23 @@ const MoviePage = ({ data }) => {
     getComments();
   }
 
+  const deleteComment = (event, data) => {
+    event.preventDefault();
+    axios({
+      method: 'delete',
+      url: `/api/movies/${data.id}`,
+      data: {
+        id: data.id,
+        name: data.name,
+        description: data.description
+      }
+    });
+    getComments();
+  };
+
   const ratingChanged = (newRating) => {
     data.rating === 0 && setRate(newRating);
-  }
+  };
 
   return (
     <>
@@ -71,7 +85,7 @@ const MoviePage = ({ data }) => {
             </div>
           </div>
         </div>
-        <CommentsList comments={comments} />
+        <CommentsList comments={comments} deleteComment={deleteComment} />
         <UserForm addComment={addComment} />
       </div>
     </>

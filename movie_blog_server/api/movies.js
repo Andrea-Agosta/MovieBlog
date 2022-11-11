@@ -1,6 +1,6 @@
 const axios = require("axios");
 const express = require('express');
-const { saveComments, getComments } = require("../database/database");
+const { saveComments, getComments, deleteComments } = require("../database/database");
 const router = express.Router();
 
 
@@ -33,6 +33,12 @@ router.get('/:id', (req, res) => {
         res.status(200).json(data)
       })
       .catch(error => console.error(error));
+  }
+});
+
+router.delete('/:id', (req, res) => {
+  if (req.body.id) {
+    deleteComments(req.body);
   }
 });
 
