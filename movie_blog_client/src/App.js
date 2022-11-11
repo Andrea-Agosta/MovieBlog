@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import List from './components/List/List';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import MoviePage from './components/MoviePage/MoviePage';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [data, setData] = useState([]);
@@ -53,6 +54,7 @@ function App() {
           <Route path="/movie/*" element={<MoviePage data={movie} />}></Route>
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }
