@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './Navbar.css';
 
 
-const Navbar = ({ search, resetPage }) => {
+const Navbar = ({ search, fetchData, category }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -16,7 +16,22 @@ const Navbar = ({ search, resetPage }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/" className="nav-link active" aria-current="page" onClick={resetPage}> Home </Link>
+              <Link to="/" className="nav-link active" aria-current="page" onClick={fetchData}> Home </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page" onClick={() => category('animation')}> Animation </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page" onClick={() => category('action')}> Action </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page" onClick={() => category('horror')}> Horror </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page" onClick={() => category('romance')}> Romance </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page" onClick={() => category('comedy')}> Comedy </Link>
             </li>
           </ul>
           <form className="d-flex" role="search" onSubmit={(event) => search(event)}>
