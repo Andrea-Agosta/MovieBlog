@@ -25,15 +25,15 @@ function App() {
 
   const search = (event) => {
     event.preventDefault();
-    axios.get('/api/search', { params: { search: event.target[0].value } })
-      .then(response => setData(response.data.data))
-      .catch(error => console.log(error))
-    event.target[0].value = '';
+    if (event.target[0].value) {
+      axios.get('/api/search', { params: { search: event.target[0].value } })
+        .then(response => setData(response.data.data))
+        .catch(error => console.log(error))
+      event.target[0].value = '';
+    }
   };
 
-  const showMovie = (data) => {
-    setMovie(data);
-  };
+  const showMovie = (data) => setMovie(data);
 
   useEffect(() => {
     fetchData();
