@@ -10,7 +10,6 @@ const MoviePage = ({ data }) => {
   const loremIpsum = `is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`;
   const [rate, setRate] = useState(data.rating);
   const [comments, setComments] = useState([]);
-  const [error, setError] = useState({ errorName: "", errorDescription: "" });
   const getComments = () => {
     axios.get(`/api/movies/${data.id}`)
       .then(response => {
@@ -23,30 +22,37 @@ const MoviePage = ({ data }) => {
 
   const addComment = (event) => {
     event.preventDefault();
-    setError({ errorName: "", errorDescription: "" });
-    if (event.target[0].value || event.target[1].value) {
-      axios({
-        method: 'post',
-        url: `/api/movies/${data.id}`,
-        data: {
-          id: data.id,
-          name: event.target[0].value,
-          description: event.target[1].value
-        }
-      });
-      event.target[0].value = "";
-      event.target[1].value = "";
-      getComments();
-    } else {
-      !event.target[1].value && setError({ ...error, errorDescription: 'Please write something' });
-      !event.target[0].value && setError({ ...error, errorName: 'Please insert your name' });
-    }
-    // console.log(error, 'errorHome');
+    axios({
+      method: 'post',
+      url: `/api/movies/${data.id}`,
+      data: {
+        id: data.id,
+        name: event.target[0].value,
+        description: event.target[1].value
+      }
+    });
+    event.target[0].value = "";
+    event.target[1].value = "";
+    getComments();
   }
+
+  const deleteComment = (event, data) => {
+    event.preventDefault();
+    axios({
+      method: 'delete',
+      url: `/api/movies/${data.id}`,
+      data: {
+        id: data.id,
+        name: data.name,
+        description: data.description
+      }
+    });
+    getComments();
+  };
 
   const ratingChanged = (newRating) => {
     data.rating === 0 && setRate(newRating);
-  }
+  };
 
   return (
     <>
@@ -79,8 +85,8 @@ const MoviePage = ({ data }) => {
             </div>
           </div>
         </div>
-        <CommentsList comments={comments} />
-        <UserForm addComment={addComment} error={error} />
+        <CommentsList comments={comments} deleteComment={deleteComment} />
+        <UserForm addComment={addComment} />
       </div>
     </>
   )

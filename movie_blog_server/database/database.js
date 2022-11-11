@@ -32,4 +32,11 @@ const getComments = async (id) => {
   return result;
 }
 
-module.exports = { saveComments, getComments };
+const deleteComments = async (data) => {
+  const { collection, client } = await connect();
+  collection.deleteOne({ "id": +data.id, name: data.name, description: data.description });
+  setTimeout(() => client.close(), 1000);
+}
+
+
+module.exports = { saveComments, getComments, deleteComments };
