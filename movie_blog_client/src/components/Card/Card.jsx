@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import './Card.css';
 
-const Card = ({ data, handleClick }) => {
+const Card = ({ data, showMovie }) => {
   return (
-    <div className="card card-width m-2 shadow p-3 mb-5 bg-body rounded" onClick={() => handleClick(data)} >
+    <div className="card card-width m-2 shadow p-3 mb-5 bg-body rounded" onClick={() => showMovie(data)} >
       <Link to={`/movie/${data.id}`} className="text-decoration-none" >
         <img src={data.title === 'Mephistopheles' ? 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1330717350l/13508283.jpg' : data.large_cover_image} className="card-img-top card-img-high" alt="movie_image" />
         <div className="card-body border-top p-0">
