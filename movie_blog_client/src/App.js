@@ -1,5 +1,4 @@
 import axios from 'axios';
-import './App.css';
 import React, { useEffect, useState } from "react";
 import Navbar from './components/Navbar/Navbar';
 import List from './components/List/List';

@@ -35,7 +35,7 @@ const Navbar = ({ search, fetchData, category }) => {
               <Link to="/" className="nav-link active" aria-current="page" onClick={() => category('comedy')}> Comedy </Link>
             </li>
           </ul>
-          <form className="d-flex me-4" role="search" onSubmit={(event) => search(event)}>
+          <form className="d-flex me-2" role="search" onSubmit={(event) => search(event)}>
             <input className="form-control me-2" type="search" placeholder="🔍   Search" aria-label="Search" />
             <button className="btn btn-outline-success" type="submit">Search</button>
           </form>
