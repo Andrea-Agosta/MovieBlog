@@ -1,7 +1,6 @@
 import './MoviePage.css'
 
 const CommentsList = ({ comments, deleteComment }) => {
-
   return comments.length > 0 && comments[0].map((comment, index) => {
     return (
       <div className="row shadow p-3 mx-1 mb-5 bg-body rounded" key={index}>

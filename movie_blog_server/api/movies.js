@@ -40,6 +40,7 @@ router.delete('/:id', (req, res) => {
   if (req.body.id) {
     deleteComments(req.body);
   }
+  res.send('');
 });
 
 module.exports = router;

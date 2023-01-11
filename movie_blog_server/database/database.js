@@ -36,6 +36,7 @@ const deleteComments = async (data) => {
   const { collection, client } = await connect();
   collection.deleteOne({ "id": +data.id, name: data.name, description: data.description });
   setTimeout(() => client.close(), 1000);
+  return true;
 }
 
 

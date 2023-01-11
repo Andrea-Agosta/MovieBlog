@@ -25,7 +25,7 @@
 
 .fa-github:hover,
 .fa-linkedin:hover {
-    color: gray;
+    color: rgb(0, 153, 255);
 }
 
 @media (min-width: 481px) {
